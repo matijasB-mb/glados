@@ -58,7 +58,7 @@ export function Footer() {
           </FooterColumn>
 
           <FooterColumn title="Partneri">
-            <FooterLink to="/#partneri">Postani partner</FooterLink>
+            <FooterLink to="/postani-partner">Postani partner</FooterLink>
             <li>
               <a href="mailto:partneri@glados.hr" className="block py-1 text-sm text-white/45 hover:text-yellow transition-colors">
                 partneri@glados.hr

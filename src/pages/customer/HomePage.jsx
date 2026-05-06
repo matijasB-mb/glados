@@ -646,13 +646,13 @@ function PartnerSection() {
             <p className="text-white/55 text-base md:text-lg max-w-md mb-9 leading-relaxed">
               Ekskluzivno radimo s prvih 10 restorana. Osigurajte svoje mjesto i dosegnite nove kupce odmah.
             </p>
-            <a
-              href="mailto:partneri@glados.hr?subject=Partnerstvo"
+            <Link
+              to="/postani-partner"
               className="group inline-flex items-center gap-2 bg-yellow text-navy font-bold px-8 py-4 rounded-[14px] hover:bg-yellow-light active:-translate-y-px transition-all shadow-yellow"
             >
               Prijavite restoran
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
             <p className="text-white/35 text-sm mt-4 font-medium">Odgovaramo unutar 24 sata</p>
           </Reveal>
 

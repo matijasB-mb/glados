@@ -1,0 +1,51 @@
+{
+  "name": "Gladoš — Dostava hrane",
+  "short_name": "Gladoš",
+  "description": "Naruči hranu iz lokalnih restorana u Vrbovcu. Dostava 15–30 min, plaćanje gotovinom.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1B3A28",
+  "theme_color": "#1B3A28",
+  "orientation": "portrait",
+  "lang": "hr",
+  "scope": "/",
+  "categories": ["food", "shopping"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.svg",
+      "sizes": "1200x630",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Naruči hranu",
+      "short_name": "Naruči",
+      "description": "Pregledaj restorane i naruči",
+      "url": "/",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Moje narudžbe",
+      "short_name": "Narudžbe",
+      "description": "Prati i pregledaj narudžbe",
+      "url": "/moje-narudzbe",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    }
+  ]
+}

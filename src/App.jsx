@@ -40,6 +40,12 @@ import { CourierDashboard } from './pages/courier/CourierDashboard'
 // GDPR
 import { CookieBanner } from './components/ui/CookieBanner'
 
+// PWA
+import { PWAInstallPrompt } from './components/ui/PWAInstallPrompt'
+
+// Partner onboarding
+import { BecomePartnerPage } from './pages/customer/BecomePartnerPage'
+
 // 404
 import { NotFoundPage } from './pages/NotFoundPage'
 
@@ -61,6 +67,9 @@ function App() {
         <Route path="/privatnost" element={<PrivacyPage />} />
         <Route path="/uvjeti" element={<TermsPage />} />
 
+        {/* Partner onboarding */}
+        <Route path="/postani-partner" element={<BecomePartnerPage />} />
+
         {/* Restaurant admin panel */}
         <Route path="/restaurant" element={<RestaurantDashboard />} />
         <Route path="/restaurant/prijava" element={<RestaurantLoginPage />} />
@@ -79,6 +88,9 @@ function App() {
 
       {/* Global GDPR cookie consent banner */}
       <CookieBanner />
+
+      {/* PWA install prompt */}
+      <PWAInstallPrompt />
     </BrowserRouter>
   )
 }
