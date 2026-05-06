@@ -4,6 +4,7 @@ import { X, Download, Share } from 'lucide-react'
 import { Logo } from './Logo'
 
 const DISMISSED_KEY = 'glados_pwa_dismissed'
+const SHOW_DELAY_MS = 12000 // 12 seconds — enough to browse, not too long
 
 function isIOS() {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
@@ -18,40 +19,40 @@ export function PWAInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState(null)
   const [show, setShow] = useState(false)
   const [ios, setIos] = useState(false)
+  const timerFiredRef = useState(false)
 
   useEffect(() => {
-    // Already installed or dismissed recently
     if (isInStandalone()) return
     if (sessionStorage.getItem(DISMISSED_KEY)) return
 
-    setIos(isIOS())
+    const onIOS = isIOS()
+    setIos(onIOS)
 
-    // Android / desktop Chrome: listen for browser prompt
+    // Capture Android/desktop install prompt
     const handler = (e) => {
       e.preventDefault()
       setDeferredPrompt(e)
+      // If delay already passed, show immediately
+      if (timerFiredRef[0]) setShow(true)
     }
     window.addEventListener('beforeinstallprompt', handler)
 
-    // Show after 20s delay (give user time to browse first)
+    // Single shared delay timer
     const timer = setTimeout(() => {
-      // Show on iOS always (no beforeinstallprompt), on Android only when prompt is ready
-      if (isIOS()) setShow(true)
-      // Android: show will be triggered after deferredPrompt is captured
-    }, 20000)
+      timerFiredRef[0] = true
+      if (onIOS) {
+        setShow(true)                          // iOS: show instructions immediately
+      }
+      // Android: show happens in handler above once deferredPrompt is ready,
+      // or below if it was captured before the timer fired
+      setDeferredPrompt(prev => { if (prev) setShow(true); return prev })
+    }, SHOW_DELAY_MS)
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handler)
       clearTimeout(timer)
     }
   }, [])
-
-  // Show Android prompt once we have it (after delay)
-  useEffect(() => {
-    if (!deferredPrompt) return
-    const timer = setTimeout(() => setShow(true), 20000)
-    return () => clearTimeout(timer)
-  }, [deferredPrompt])
 
   async function handleInstall() {
     if (!deferredPrompt) return
