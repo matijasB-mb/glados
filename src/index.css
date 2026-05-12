@@ -1,27 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  /* === GLADOŠ — Forest Green & Golden Yellow === */
-  --color-navy: #1B3A28;
-  --color-navy-50: #f0f7f3;
-  --color-navy-100: #d4ebe0;
-  --color-navy-200: #a8d7c1;
-  --color-navy-light: #204D35;
-  --color-navy-dark: #0F2118;
+  /* ═══════════════════════════════════════════════
+     GLADOOŠ — V2 Color System
+     Primary: Orange #FF7A00
+     Base: Near-black #121212
+     Background: Warm cream #FFF8F1
+  ═══════════════════════════════════════════════ */
 
-  --color-yellow: #F5C518;
-  --color-yellow-light: #FFD84D;
-  --color-yellow-dark: #D4A80E;
-  --color-cream: #FAFAF8;
+  /* Core brand — keeping same variable names so all
+     existing components auto-update without file changes */
+  --color-navy:       #121212;   /* near-black — headers, text, dark bg */
+  --color-navy-light: #1a1a1a;
+  --color-navy-dark:  #0a0a0a;
+  --color-navy-50:    #f5f5f5;
+  --color-navy-100:   #e7e7e7;
+  --color-navy-200:   #d1d5db;
 
-  /* Outfit for all text, JetBrains Mono for numbers/prices */
-  --font-sans: 'Outfit', system-ui, sans-serif;
+  --color-yellow:       #FF7A00;   /* primary orange — CTAs, brand accent */
+  --color-yellow-light: #FF9500;   /* hover state */
+  --color-yellow-dark:  #E16500;   /* pressed state */
+
+  --color-cream: #FFF8F1;          /* warm cream — page background */
+
+  /* Functional palette */
+  --color-success:     #22C55E;
+  --color-error:       #EF4444;
+  --color-accent:      #FFC107;    /* accent yellow — badges, highlights */
+  --color-info:        #3B82F6;
+
+  /* Neutrals */
+  --color-gray-bg:     #F5F5F5;
+  --color-gray-border: #E7E7E7;
+  --color-dark-text:   #231F20;
+  --color-sec-text:    #6B6B6B;
+
+  /* Typography */
+  --font-sans:    'Outfit', system-ui, sans-serif;
   --font-display: 'Outfit', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
 
-  --shadow-card: 0 4px 24px rgb(27 58 40 / 0.07);
-  --shadow-card-hover: 0 16px 40px rgb(27 58 40 / 0.14);
-  --shadow-yellow: 0 8px 24px rgb(245 197 24 / 0.25);
+  /* Shadows — tinted with brand black */
+  --shadow-card:       0 4px 24px rgb(18 18 18 / 0.07);
+  --shadow-card-hover: 0 16px 40px rgb(18 18 18 / 0.13);
+  --shadow-yellow:     0 8px 24px rgb(255 122 0 / 0.28);
 }
 
 * { box-sizing: border-box; }
@@ -31,8 +53,8 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: 'Outfit', system-ui, sans-serif;
-  background: #FAFAF8;
-  color: #1B3A28;
+  background: #FFF8F1;
+  color: #231F20;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -43,7 +65,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
 }
 
-/* Monospace for prices and stats */
 .font-mono {
   font-family: 'JetBrains Mono', monospace;
 }
@@ -58,59 +79,65 @@ h1, h2, h3, h4, h5, h6 {
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
 .bg-grid {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.07) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0);
   background-size: 28px 28px;
 }
 
-/* Golden gradient text — used sparingly on hero only */
+/* Orange gradient text — hero accent */
 .text-gradient-yellow {
-  background: linear-gradient(135deg, #F5C518 0%, #FFD84D 60%);
+  background: linear-gradient(135deg, #FF7A00 0%, #FF9500 60%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Skeleton shimmer — updated for new palette */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #f0ece8 25%, #e8e2db 50%, #f0ece8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: 10px;
+}
+
 /* Float animations for hero cards */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50%       { transform: translateY(-10px); }
 }
 @keyframes float-alt {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-14px); }
+  50%       { transform: translateY(-14px); }
 }
-.float-card { animation: float 4s ease-in-out infinite; }
+.float-card     { animation: float     4s   ease-in-out infinite; }
 .float-card-alt { animation: float-alt 5.5s ease-in-out infinite; }
 
-/* Grain/noise texture overlay — subtle tactile depth on dark sections */
-.grain {
-  position: relative;
-}
+/* Grain/noise texture — dark sections */
+.grain { position: relative; }
 .grain::after {
   content: '';
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.035;
+  opacity: 0.04;
   pointer-events: none;
   z-index: 10;
   border-radius: inherit;
 }
 
-/* Spotlight hover — used on dark glass cards */
+/* Spotlight hover — dark glass cards */
 .spotlight-card {
   position: relative;
   overflow: hidden;
 }
 
-/* Skeleton shimmer loader */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+/* Orange gradient button */
+.btn-orange {
+  background: linear-gradient(135deg, #FF7A00, #FF9500);
 }
-.skeleton {
-  background: linear-gradient(90deg, #e8f0ec 25%, #d4e8da 50%, #e8f0ec 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.8s ease-in-out infinite;
-  border-radius: 10px;
+.btn-orange:hover {
+  background: linear-gradient(135deg, #FF9500, #FFa030);
 }

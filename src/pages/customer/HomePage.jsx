@@ -2,10 +2,10 @@ import { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  ShoppingCart, ChefHat, Bike, Smartphone, Zap, BarChart3,
-  ArrowRight, Clock, Star, ChevronDown, CheckCircle2, MapPin,
-  Banknote, Shield, Package, Plus, TrendingUp,
-  Utensils, Flame, Beef, Pizza,
+  ShoppingCart, ChefHat, Bike, Smartphone, Zap,
+  ArrowRight, Clock, Star, ChevronDown, CheckCircle2,
+  Shield, Package, Plus, TrendingUp,
+  Utensils, Flame, Beef, Pizza, Leaf, Coffee,
 } from 'lucide-react'
 import { Logo } from '../../components/ui/Logo'
 import { supabase } from '../../services/supabase'
@@ -38,7 +38,7 @@ function SpotlightCard({ children, className = '', style = {} }) {
           transform: 'translate(-50%, -50%)',
           width: 220,
           height: 220,
-          background: 'radial-gradient(circle, rgba(245,197,24,0.18) 0%, transparent 68%)',
+          background: 'radial-gradient(circle, rgba(255,122,0,0.18) 0%, transparent 68%)',
           opacity: pos.visible ? 1 : 0,
           pointerEvents: 'none',
           transition: 'opacity 0.35s ease',
@@ -52,8 +52,6 @@ function SpotlightCard({ children, className = '', style = {} }) {
 }
 
 /* ── Animation presets ─────────────────────────────────────────── */
-const spring = { type: 'spring', stiffness: 120, damping: 22 }
-
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
@@ -109,29 +107,22 @@ export function HomePage() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   HERO
+   HERO — cream background, dark text, orange accents
 ══════════════════════════════════════════════════════════════════ */
 function Hero() {
   return (
     <section
-      className="grain relative overflow-hidden bg-gradient-to-br from-navy via-navy to-navy-dark text-white -mt-20"
-      style={{ height: '100dvh', flexShrink: 0 }}
+      className="relative overflow-hidden -mt-20"
+      style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column', justifyContent: 'center', flexShrink: 0 }}
     >
-      <div className="absolute inset-0 bg-grid opacity-20" />
-      <div className="absolute -top-40 -right-20 w-[600px] h-[600px] bg-yellow/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-yellow/8 rounded-full blur-3xl pointer-events-none" />
+      {/* Ambient orange glow — upper right */}
+      <div className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-yellow/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Subtle bottom glow */}
+      <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-yellow/6 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Wave at the very bottom */}
-      <div className="absolute bottom-[-2px] left-0 right-0 pointer-events-none">
-        <svg viewBox="0 0 1440 80" className="w-full block" preserveAspectRatio="none">
-          <path d="M0,80 L1440,80 L1440,20 C1080,65 720,5 360,45 C240,55 120,65 0,55 Z" fill="#FAFAF8"/>
-        </svg>
-      </div>
-
-      {/* Content — relative, full height, centres with padding for navbar */}
       <div
-        className="relative h-full flex flex-col justify-center"
-        style={{ paddingTop: '100px', paddingBottom: '60px' }}
+        className="relative flex flex-col justify-center"
+        style={{ paddingTop: '120px', paddingBottom: '80px' }}
       >
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 w-full">
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-12 items-center">
@@ -142,31 +133,31 @@ function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.1 }}
-                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 mb-4 lg:mb-6 w-fit"
+                className="inline-flex items-center gap-2 bg-yellow/12 border border-yellow/25 rounded-full px-4 py-1.5 mb-5 w-fit"
               >
                 <span className="relative flex w-2 h-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow" />
                 </span>
-                <span className="text-sm font-semibold text-white/90 tracking-wide">Dostava u Vrbovcu</span>
+                <span className="text-sm font-semibold text-yellow-dark tracking-wide">Dostava u Vrbovcu</span>
               </motion.div>
 
               <motion.h1
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="font-display font-black leading-[1.0] tracking-tight mb-4"
-                style={{ fontSize: 'clamp(2.4rem, 6vw, 5rem)', textWrap: 'balance' }}
+                className="font-display font-black text-navy leading-[1.0] tracking-tight mb-5"
+                style={{ fontSize: 'clamp(2.6rem, 6.5vw, 5.5rem)', textWrap: 'balance' }}
               >
                 Gladan si?<br />
-                <span className="text-gradient-yellow">Gladoš dolazi.</span>
+                <span className="text-gradient-yellow">Gladooš dolazi.</span>
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 }}
-                className="text-base lg:text-lg text-white/65 max-w-md mb-6 leading-relaxed"
+                className="text-base lg:text-lg text-navy/55 max-w-md mb-7 leading-relaxed"
               >
                 Naruči iz najboljih restorana u Vrbovcu u par klikova.
                 Plati gotovinom kad stigne — bez kartica, bez aplikacije.
@@ -176,18 +167,18 @@ function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.45 }}
-                className="flex flex-col sm:flex-row gap-3 mb-8"
+                className="flex flex-col sm:flex-row gap-3 mb-9"
               >
                 <a
                   href="#restorani"
-                  className="group bg-yellow text-navy font-bold px-8 py-4 rounded-[14px] hover:bg-yellow-light active:-translate-y-px transition-all shadow-yellow text-center inline-flex items-center justify-center gap-2 text-base"
+                  className="group bg-yellow text-navy font-bold px-8 py-4 rounded-[14px] hover:bg-yellow-light active:scale-[0.98] transition-all shadow-yellow text-center inline-flex items-center justify-center gap-2 text-base"
                 >
                   Vidi restorane
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <Link
                   to="/registracija"
-                  className="border-2 border-white/20 text-white font-semibold px-8 py-4 rounded-[14px] hover:bg-white/10 hover:border-white/40 active:-translate-y-px transition-all text-center text-base"
+                  className="border-2 border-navy/15 text-navy font-semibold px-8 py-4 rounded-[14px] hover:bg-navy/5 hover:border-navy/25 active:scale-[0.98] transition-all text-center text-base"
                 >
                   Kreiraj račun
                 </Link>
@@ -204,8 +195,8 @@ function Hero() {
                   { icon: CheckCircle2, text: 'Cash on delivery' },
                   { icon: CheckCircle2, text: '15–30 min dostava' },
                 ].map(({ icon: Icon, text }, i) => (
-                  <span key={i} className="flex items-center gap-1.5 text-white/50">
-                    <Icon className="w-3.5 h-3.5 text-yellow/70" />
+                  <span key={i} className="flex items-center gap-1.5 text-navy/45">
+                    <Icon className="w-3.5 h-3.5 text-yellow" />
                     {text}
                   </span>
                 ))}
@@ -222,22 +213,22 @@ function Hero() {
             >
               {/* Phone frame */}
               <div className="relative w-64">
-                <div className="bg-[#0D1B12] rounded-[42px] p-3 shadow-[0_40px_80px_rgba(0,0,0,0.6)] border border-white/8">
+                <div className="bg-[#121212] rounded-[42px] p-3 shadow-[0_32px_72px_rgba(18,18,18,0.22),0_0_0_1px_rgba(18,18,18,0.08)] border border-white/5">
                   {/* Screen */}
                   <div className="rounded-[32px] overflow-hidden h-[460px] bg-cream flex flex-col">
                     {/* Status bar */}
-                    <div className="bg-navy px-5 pt-3 pb-2 flex items-center justify-between shrink-0">
-                      <span className="text-white/70 text-[10px] font-mono font-bold">9:41</span>
-                      <div className="w-20 h-5 bg-[#0D1B12] rounded-full" />
+                    <div className="bg-[#121212] px-5 pt-3 pb-2 flex items-center justify-between shrink-0">
+                      <span className="text-white/60 text-[10px] font-mono font-bold">9:41</span>
+                      <div className="w-20 h-5 bg-black rounded-full" />
                       <div className="flex gap-0.5 items-center">
-                        <div className="w-3 h-2 rounded-sm bg-white/50" />
+                        <div className="w-3 h-2 rounded-sm bg-white/40" />
                       </div>
                     </div>
 
                     {/* App header */}
-                    <div className="bg-navy px-5 pb-4 shrink-0">
+                    <div className="bg-[#121212] px-5 pb-4 shrink-0">
                       <Logo variant="light" className="h-6 w-auto" />
-                      <p className="text-white/50 text-[10px] font-medium mt-1">Vrbovec · 4 restorana</p>
+                      <p className="text-white/45 text-[10px] font-medium mt-1">Vrbovec · 4 restorana</p>
                     </div>
 
                     {/* Restaurant list */}
@@ -255,12 +246,12 @@ function Hero() {
                           transition={{ delay: 0.65 + i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                           className="bg-white rounded-2xl p-2.5 flex items-center gap-2.5 shadow-sm"
                         >
-                          <div className="w-8 h-8 bg-navy/6 rounded-xl flex items-center justify-center shrink-0">
-                            <r.Icon className="w-4 h-4 text-navy/60" strokeWidth={1.5} />
+                          <div className="w-8 h-8 bg-navy/5 rounded-xl flex items-center justify-center shrink-0">
+                            <r.Icon className="w-4 h-4 text-navy/50" strokeWidth={1.5} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="font-bold text-navy text-xs leading-tight">{r.name}</p>
-                            <p className="text-navy/40 text-[10px] font-mono">{r.time} min</p>
+                            <p className="text-navy/35 text-[10px] font-mono">{r.time} min</p>
                           </div>
                           <div className="w-6 h-6 bg-yellow rounded-lg flex items-center justify-center shrink-0">
                             <Plus className="w-3 h-3 text-navy" />
@@ -276,7 +267,7 @@ function Hero() {
                   initial={{ opacity: 0, x: 25, y: -15 }}
                   animate={{ opacity: 1, x: 0, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.85 }}
-                  className="absolute -top-4 -right-10 bg-white rounded-2xl shadow-2xl px-4 py-3 float-card z-20"
+                  className="absolute -top-4 -right-10 bg-white rounded-2xl shadow-card px-4 py-3 float-card z-20 border border-navy/5"
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="w-9 h-9 bg-yellow/15 rounded-xl flex items-center justify-center">
@@ -288,25 +279,25 @@ function Hero() {
                     </div>
                   </div>
                 </motion.div>
-              </div>
 
-              {/* Confirmed badge — bottom left */}
-              <motion.div
-                initial={{ opacity: 0, x: -25, y: 15 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.95 }}
-                className="absolute bottom-20 left-4 bg-white rounded-2xl shadow-2xl px-4 py-3 float-card-alt z-20"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 bg-yellow/15 rounded-xl flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5 text-yellow-dark" />
+                {/* Confirmed badge — bottom left */}
+                <motion.div
+                  initial={{ opacity: 0, x: -25, y: 15 }}
+                  animate={{ opacity: 1, x: 0, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.95 }}
+                  className="absolute bottom-20 -left-12 bg-white rounded-2xl shadow-card px-4 py-3 float-card-alt z-20 border border-navy/5"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 bg-yellow/15 rounded-xl flex items-center justify-center">
+                      <CheckCircle2 className="w-5 h-5 text-yellow-dark" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-navy/40 font-medium">Narudžba potvrđena</p>
+                      <p className="font-bold text-navy text-xs font-mono">#GL-00042</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[10px] text-navy/40 font-medium">Narudžba potvrđena</p>
-                    <p className="font-bold text-navy text-xs font-mono">#HJ-00042</p>
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </motion.div>
 
           </div>
@@ -317,7 +308,7 @@ function Hero() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   STATS — monospace numbers per Stitch rules
+   STATS STRIP — monospace numbers
 ══════════════════════════════════════════════════════════════════ */
 function StatsStrip() {
   const stats = [
@@ -327,20 +318,20 @@ function StatsStrip() {
     { value: '0', unit: '€', label: 'Skrivenih troškova', icon: Shield },
   ]
   return (
-    <section className="max-w-[1280px] mx-auto px-4 sm:px-6 -mt-2 mb-12 relative z-10">
+    <section className="max-w-[1280px] mx-auto px-4 sm:px-6 mb-12 relative z-10">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-40px' }}
         variants={stagger}
-        className="grid grid-cols-2 md:grid-cols-4 bg-white rounded-[24px] border border-navy/5 overflow-hidden"
-        style={{ boxShadow: '0 4px 32px rgba(27,58,40,0.08)' }}
+        className="grid grid-cols-2 md:grid-cols-4 bg-white rounded-[24px] border border-navy/6 overflow-hidden"
+        style={{ boxShadow: '0 4px 32px rgba(18,18,18,0.07)' }}
       >
         {stats.map((s, i) => (
           <motion.div
             key={i}
             variants={fadeUp}
-            className={`p-6 md:p-8 text-center group hover:bg-navy-50/50 transition-colors ${
+            className={`p-6 md:p-8 text-center group hover:bg-cream transition-colors ${
               i < 2 ? 'border-b md:border-b-0' : ''
             } ${i % 2 === 0 ? 'border-r' : ''} ${i === 1 ? 'md:border-r' : ''} ${i === 2 ? 'md:border-r' : ''} border-navy/5`}
           >
@@ -357,12 +348,48 @@ function StatsStrip() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
+   CATEGORY CHIPS
+══════════════════════════════════════════════════════════════════ */
+function CategoryChips() {
+  const [active, setActive] = useState('Sve')
+  const categories = [
+    { label: 'Sve',      Icon: Utensils },
+    { label: 'Burgeri',  Icon: Beef },
+    { label: 'Pizza',    Icon: Pizza },
+    { label: 'Piletina', Icon: Flame },
+    { label: 'Kebab',    Icon: ChefHat },
+    { label: 'Salate',   Icon: Leaf },
+    { label: 'Deserti',  Icon: Star },
+    { label: 'Pića',     Icon: Coffee },
+  ]
+
+  return (
+    <div className="flex gap-2.5 overflow-x-auto scrollbar-hide pb-1 mb-10">
+      {categories.map(({ label, Icon }) => (
+        <button
+          key={label}
+          onClick={() => setActive(label)}
+          className={`flex-none inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full font-semibold text-sm transition-all whitespace-nowrap focus:outline-none ${
+            active === label
+              ? 'bg-yellow text-navy shadow-md shadow-yellow/30'
+              : 'bg-white text-navy/55 border border-navy/8 hover:border-yellow/40 hover:text-navy hover:bg-yellow/5'
+          }`}
+        >
+          <Icon className="w-3.5 h-3.5" strokeWidth={2} />
+          {label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+/* ══════════════════════════════════════════════════════════════════
    RESTAURANTS
 ══════════════════════════════════════════════════════════════════ */
 function RestaurantsSection({ restaurants, loading }) {
   return (
     <section id="restorani" className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12 md:py-20">
-      <Reveal className="mb-12">
+      <Reveal className="mb-10">
         <span className="inline-block bg-yellow/15 text-yellow-dark font-bold text-xs uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
           Restorani
         </span>
@@ -373,6 +400,8 @@ function RestaurantsSection({ restaurants, loading }) {
           Najbolji lokalni restorani u Vrbovcu, svi na jednom mjestu.
         </p>
       </Reveal>
+
+      <CategoryChips />
 
       {loading ? (
         <RestaurantSkeleton />
@@ -386,7 +415,7 @@ function RestaurantsSection({ restaurants, loading }) {
             <p className="text-navy/50 max-w-sm mx-auto mb-7 leading-relaxed">
               Radimo na prvim partnerima. Registriraj se i obavijestit ćemo te čim krenemo.
             </p>
-            <Link to="/registracija" className="inline-block bg-navy text-white font-bold px-7 py-3.5 rounded-[14px] hover:bg-navy-light active:-translate-y-px transition-all shadow-card">
+            <Link to="/registracija" className="inline-block bg-navy text-white font-bold px-7 py-3.5 rounded-[14px] hover:bg-navy-light active:scale-[0.98] transition-all shadow-card">
               Obavijesti me
             </Link>
           </div>
@@ -410,16 +439,20 @@ function RestaurantsSection({ restaurants, loading }) {
   )
 }
 
-/* Skeleton loader — matches card layout, no spinner */
+/* Skeleton — text-only layout, no image placeholder */
 function RestaurantSkeleton() {
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {[1, 2, 3].map(i => (
-        <div key={i} className="bg-white rounded-[28px] overflow-hidden border border-navy/5">
-          <div className="skeleton h-48 rounded-none" />
-          <div className="p-5 space-y-3">
-            <div className="skeleton h-5 w-3/4" />
-            <div className="skeleton h-4 w-full" />
+        <div key={i} className="bg-white rounded-[24px] p-6 border border-navy/5 space-y-4">
+          <div className="flex justify-between items-center">
+            <div className="skeleton h-6 w-24 rounded-full" />
+            <div className="skeleton h-5 w-5 rounded" />
+          </div>
+          <div className="skeleton h-6 w-3/4" />
+          <div className="skeleton h-4 w-full" />
+          <div className="skeleton h-4 w-2/3" />
+          <div className="border-t border-navy/5 pt-4">
             <div className="skeleton h-4 w-1/2" />
           </div>
         </div>
@@ -428,52 +461,58 @@ function RestaurantSkeleton() {
   )
 }
 
+/* Text-only restaurant card — no images */
 function RestaurantCard({ restaurant }) {
   return (
     <Link
       to={`/restoran/${restaurant.slug}`}
-      className="group block bg-white rounded-[28px] border border-navy/5 hover:-translate-y-2 transition-all duration-300 overflow-hidden"
-      style={{ boxShadow: '0 4px 24px rgba(27,58,40,0.07)' }}
-      onMouseEnter={e => e.currentTarget.style.boxShadow = '0 16px 40px rgba(27,58,40,0.14)'}
-      onMouseLeave={e => e.currentTarget.style.boxShadow = '0 4px 24px rgba(27,58,40,0.07)'}
+      className="group block bg-white rounded-[24px] border border-navy/5 hover:-translate-y-1.5 transition-all duration-300 p-6"
+      style={{ boxShadow: '0 4px 24px rgba(18,18,18,0.06)' }}
+      onMouseEnter={e => e.currentTarget.style.boxShadow = '0 16px 40px rgba(18,18,18,0.12)'}
+      onMouseLeave={e => e.currentTarget.style.boxShadow = '0 4px 24px rgba(18,18,18,0.06)'}
     >
-      <div className="relative h-48 bg-gradient-to-br from-navy to-navy-light overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(245,197,24,0.2),transparent_60%)]" />
-        <img
-          src={restaurant.logo_url ?? '/assets/frankie-logo.png'}
-          alt={restaurant.name}
-          className="absolute inset-0 w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
-        />
-        <div className="absolute top-3 left-3">
-          <span className={`text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 ${restaurant.is_open ? 'bg-yellow text-navy' : 'bg-white/20 text-white backdrop-blur'}`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${restaurant.is_open ? 'bg-navy' : 'bg-white/60'}`} />
-            {restaurant.is_open ? 'Otvoreno' : 'Zatvoreno'}
-          </span>
-        </div>
+      {/* Top row — status badge + arrow */}
+      <div className="flex items-start justify-between mb-5">
+        <span className={`text-xs font-bold px-2.5 py-1 rounded-full inline-flex items-center gap-1.5 ${
+          restaurant.is_open
+            ? 'bg-yellow/12 text-yellow-dark'
+            : 'bg-navy/5 text-navy/35'
+        }`}>
+          <span className={`w-1.5 h-1.5 rounded-full ${restaurant.is_open ? 'bg-yellow-dark' : 'bg-navy/25'}`} />
+          {restaurant.is_open ? 'Otvoreno' : 'Zatvoreno'}
+        </span>
+        <ArrowRight className="w-4 h-4 text-navy/20 group-hover:text-yellow-dark group-hover:translate-x-0.5 transition-all duration-200" />
       </div>
-      <div className="p-5">
-        <h3 className="font-display font-black text-navy text-lg leading-tight group-hover:text-yellow-dark transition-colors mb-1" style={{ letterSpacing: '-0.02em' }}>
-          {restaurant.name}
-        </h3>
-        {restaurant.description && (
-          <p className="text-sm text-navy/45 mt-1 line-clamp-2 leading-relaxed">{restaurant.description}</p>
-        )}
-        <div className="flex items-center gap-4 mt-4 text-sm border-t border-navy/5 pt-4">
-          <span className="flex items-center gap-1.5 text-navy/55">
-            <Clock className="w-4 h-4 text-yellow" />
-            <span className="font-mono font-bold text-navy">{restaurant.delivery_time_min}–{restaurant.delivery_time_max}</span>
-            <span className="text-navy/40">min</span>
-          </span>
-          <span className="w-1 h-1 rounded-full bg-navy/15" />
-          <span className="text-navy/45">Min. <span className="font-mono font-bold text-navy">{Number(restaurant.min_order_amount).toFixed(2)} €</span></span>
-        </div>
+
+      {/* Restaurant name */}
+      <h3
+        className="font-display font-black text-navy text-xl mb-2 group-hover:text-yellow-dark transition-colors"
+        style={{ letterSpacing: '-0.025em' }}
+      >
+        {restaurant.name}
+      </h3>
+
+      {/* Description */}
+      {restaurant.description && (
+        <p className="text-sm text-navy/45 line-clamp-2 leading-relaxed mb-5">{restaurant.description}</p>
+      )}
+
+      {/* Meta row */}
+      <div className="flex items-center gap-4 text-sm border-t border-navy/5 pt-4 mt-auto">
+        <span className="flex items-center gap-1.5 text-navy/55">
+          <Clock className="w-4 h-4 text-yellow" />
+          <span className="font-mono font-bold text-navy">{restaurant.delivery_time_min}–{restaurant.delivery_time_max}</span>
+          <span className="text-navy/35">min</span>
+        </span>
+        <span className="w-1 h-1 rounded-full bg-navy/15 shrink-0" />
+        <span className="text-navy/45 text-xs">Min. <span className="font-mono font-bold text-navy text-sm">{Number(restaurant.min_order_amount).toFixed(2)} €</span></span>
       </div>
     </Link>
   )
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   HOW IT WORKS — zig-zag layout (never 3 equal columns)
+   HOW IT WORKS — zig-zag layout
 ══════════════════════════════════════════════════════════════════ */
 function HowItWorks() {
   const steps = [
@@ -504,7 +543,7 @@ function HowItWorks() {
   ]
 
   return (
-    <section id="kako-radi" className="py-16 md:py-28" style={{ background: 'rgba(27,58,40,0.03)' }}>
+    <section id="kako-radi" className="py-16 md:py-28" style={{ background: 'rgba(18,18,18,0.025)' }}>
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
         <Reveal className="mb-16">
           <span className="inline-block bg-yellow/15 text-yellow-dark font-bold text-xs uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
@@ -515,7 +554,6 @@ function HowItWorks() {
           </h2>
         </Reveal>
 
-        {/* Zig-zag layout — never 3 equal cards */}
         <div className="space-y-8 md:space-y-0">
           {steps.map((s, i) => (
             <motion.div
@@ -527,17 +565,15 @@ function HowItWorks() {
               transition={{ delay: i * 0.1 }}
               className={`grid md:grid-cols-2 gap-8 md:gap-16 items-center ${i % 2 === 1 ? 'md:[&>*:first-child]:order-2' : ''}`}
             >
-              {/* Icon + visual side */}
-              <div className={`relative bg-white rounded-[28px] p-10 flex items-center justify-center min-h-[220px] border border-navy/5`}
-                style={{ boxShadow: '0 4px 24px rgba(27,58,40,0.07)' }}
+              <div
+                className="relative bg-white rounded-[28px] p-10 flex items-center justify-center min-h-[220px] border border-navy/5"
+                style={{ boxShadow: '0 4px 24px rgba(18,18,18,0.06)' }}
               >
-                <div className="absolute top-6 left-6 font-mono font-black text-6xl text-navy/5 select-none leading-none">{s.number}</div>
-                <div className={`w-20 h-20 bg-gradient-to-br ${s.color} rounded-3xl flex items-center justify-center shadow-sm`}>
+                <div className="absolute top-6 left-6 font-mono font-black text-6xl text-navy/4 select-none leading-none">{s.number}</div>
+                <div className={`w-20 h-20 bg-gradient-to-br ${s.color} rounded-3xl flex items-center justify-center`}>
                   <s.icon className={`w-10 h-10 ${s.iconColor}`} />
                 </div>
               </div>
-
-              {/* Text side */}
               <div>
                 <div className="font-mono text-xs font-bold text-navy/30 tracking-widest mb-3 uppercase">Korak {s.number}</div>
                 <h3 className="font-display font-black text-navy text-2xl mb-3" style={{ letterSpacing: '-0.02em' }}>{s.title}</h3>
@@ -573,7 +609,6 @@ function Testimonials() {
           </h2>
         </Reveal>
 
-        {/* Offset grid — col 2 is elevated */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -586,9 +621,8 @@ function Testimonials() {
               key={i}
               variants={fadeUp}
               className={`bg-cream border border-navy/5 rounded-[24px] p-7 ${i === 1 ? 'md:mt-10' : ''}`}
-              style={{ boxShadow: '0 4px 24px rgba(27,58,40,0.06)' }}
+              style={{ boxShadow: '0 4px 24px rgba(18,18,18,0.05)' }}
             >
-              {/* Large decorative quote mark */}
               <div className="font-mono font-black text-5xl text-yellow/40 leading-none mb-4 select-none">"</div>
               <p className="text-navy/70 text-base leading-relaxed mb-6">{r.text}"</p>
               <div className="flex items-center gap-3 pt-5 border-t border-navy/6">
@@ -614,7 +648,7 @@ function Testimonials() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   PARTNER
+   PARTNER — dark section, stays dark
 ══════════════════════════════════════════════════════════════════ */
 function PartnerSection() {
   const benefits = [
@@ -628,7 +662,7 @@ function PartnerSection() {
     <section id="partneri" className="grain relative py-16 md:py-28 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy to-navy-dark" />
       <div className="absolute inset-0 bg-grid opacity-20" />
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-yellow/12 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-yellow/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 text-white">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
@@ -648,7 +682,7 @@ function PartnerSection() {
             </p>
             <Link
               to="/postani-partner"
-              className="group inline-flex items-center gap-2 bg-yellow text-navy font-bold px-8 py-4 rounded-[14px] hover:bg-yellow-light active:-translate-y-px transition-all shadow-yellow"
+              className="group inline-flex items-center gap-2 bg-yellow text-navy font-bold px-8 py-4 rounded-[14px] hover:bg-yellow-light active:scale-[0.98] transition-all shadow-yellow"
             >
               Prijavite restoran
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -682,7 +716,7 @@ function PartnerSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   FAQ — animated accordion with left accent border
+   FAQ — animated accordion
 ══════════════════════════════════════════════════════════════════ */
 function FAQ() {
   const items = [
@@ -718,7 +752,7 @@ function FAQ() {
               key={i}
               variants={fadeUp}
               className={`bg-white rounded-[18px] overflow-hidden transition-all duration-300 border-l-[3px] ${open === i ? 'border-yellow' : 'border-transparent'}`}
-              style={{ boxShadow: open === i ? '0 4px 24px rgba(27,58,40,0.08)' : '0 1px 4px rgba(27,58,40,0.05)' }}
+              style={{ boxShadow: open === i ? '0 4px 24px rgba(18,18,18,0.08)' : '0 1px 4px rgba(18,18,18,0.04)' }}
             >
               <button
                 onClick={() => setOpen(open === i ? -1 : i)}

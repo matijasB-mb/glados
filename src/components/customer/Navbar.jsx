@@ -24,8 +24,9 @@ export function Navbar({ transparent = false }) {
     navigate('/')
   }
 
-  const isLight = transparent && !scrolled
-  const bgClass = isLight
+  // Hero is now cream-background — navbar always uses dark text regardless of scroll
+  const isFloating = transparent && !scrolled
+  const bgClass = isFloating
     ? 'bg-transparent'
     : 'bg-white/95 backdrop-blur-xl border-b border-navy/8 shadow-sm'
 
@@ -34,33 +35,33 @@ export function Navbar({ transparent = false }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center group shrink-0">
           <Logo
-            variant={isLight ? 'light' : 'dark'}
+            variant="dark"
             className="h-9 md:h-11 w-auto transition-transform duration-200 group-hover:scale-105"
           />
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
-          <Link to="/#kako-radi" className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${isLight ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-navy/60 hover:text-navy hover:bg-navy/5'}`}>
+          <Link to="/#kako-radi" className="px-4 py-2 text-sm font-semibold rounded-xl transition-colors text-navy/60 hover:text-navy hover:bg-navy/5">
             Kako radi
           </Link>
-          <Link to="/#partneri" className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${isLight ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-navy/60 hover:text-navy hover:bg-navy/5'}`}>
+          <Link to="/#partneri" className="px-4 py-2 text-sm font-semibold rounded-xl transition-colors text-navy/60 hover:text-navy hover:bg-navy/5">
             Za restorane
           </Link>
 
           {user ? (
             <>
-              <Link to="/moje-narudzbe" className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${isLight ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-navy/60 hover:text-navy hover:bg-navy/5'}`}>
+              <Link to="/moje-narudzbe" className="px-4 py-2 text-sm font-semibold rounded-xl transition-colors text-navy/60 hover:text-navy hover:bg-navy/5">
                 Narudžbe
               </Link>
-              <div className={`w-px h-5 mx-2 ${isLight ? 'bg-white/20' : 'bg-navy/10'}`} />
+              <div className="w-px h-5 mx-2 bg-navy/10" />
               <div className="flex items-center gap-2">
                 <div className="w-9 h-9 bg-yellow text-navy font-bold rounded-full flex items-center justify-center text-sm shadow-sm">
                   {(profile?.first_name?.[0] ?? user.email?.[0] ?? '?').toUpperCase()}
                 </div>
                 <button
                   onClick={handleSignOut}
-                  className={`text-sm font-medium transition-colors ${isLight ? 'text-white/60 hover:text-white' : 'text-navy/40 hover:text-navy'}`}
+                  className="text-sm font-medium transition-colors text-navy/40 hover:text-navy"
                 >
                   Odjava
                 </button>
@@ -68,7 +69,7 @@ export function Navbar({ transparent = false }) {
             </>
           ) : (
             <>
-              <Link to="/prijava" className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${isLight ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-navy/60 hover:text-navy hover:bg-navy/5'}`}>
+              <Link to="/prijava" className="px-4 py-2 text-sm font-semibold rounded-xl transition-colors text-navy/60 hover:text-navy hover:bg-navy/5">
                 Prijava
               </Link>
               <Link
@@ -81,7 +82,7 @@ export function Navbar({ transparent = false }) {
           )}
 
           <Link to="/checkout" className="relative ml-2">
-            <div className={`rounded-xl p-2.5 transition-all ${isLight ? 'bg-white/15 text-white hover:bg-white/25' : 'bg-yellow text-navy hover:bg-yellow-dark shadow-sm'}`}>
+            <div className="rounded-xl p-2.5 transition-all bg-yellow text-navy hover:bg-yellow-dark shadow-sm">
               <CartIcon />
               {totalItems > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 bg-navy text-yellow text-[10px] font-black rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center border-2 border-white shadow-sm">
@@ -95,7 +96,7 @@ export function Navbar({ transparent = false }) {
         {/* Mobile: cart + hamburger */}
         <div className="md:hidden flex items-center gap-2">
           <Link to="/checkout" className="relative">
-            <div className={`rounded-xl p-2.5 ${isLight ? 'bg-white/15 text-white' : 'bg-yellow text-navy'}`}>
+            <div className="rounded-xl p-2.5 bg-yellow text-navy">
               <CartIcon />
               {totalItems > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 bg-navy text-yellow text-[10px] font-black rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center border-2 border-white">
@@ -106,7 +107,7 @@ export function Navbar({ transparent = false }) {
           </Link>
           <button
             onClick={() => setMenuOpen(v => !v)}
-            className={`p-2.5 rounded-xl transition-colors ${isLight ? 'text-white hover:bg-white/10' : 'text-navy hover:bg-navy/5'}`}
+            className="p-2.5 rounded-xl transition-colors text-navy hover:bg-navy/5"
             aria-label="Menu"
           >
             {menuOpen ? (

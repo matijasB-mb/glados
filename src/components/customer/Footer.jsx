@@ -10,7 +10,7 @@ export function Footer() {
         <div className="grid md:grid-cols-2 gap-6 items-center">
           <div>
             <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-              Gladan si? <span className="text-yellow">Gladoš dolazi.</span>
+              Gladan si? <span className="text-yellow">Gladooš dolazi.</span>
             </h3>
             <p className="text-white/50 text-sm">Plaćanje gotovinom — bez kartica, bez aplikacije.</p>
           </div>
@@ -60,8 +60,8 @@ export function Footer() {
           <FooterColumn title="Partneri">
             <FooterLink to="/postani-partner">Postani partner</FooterLink>
             <li>
-              <a href="mailto:partneri@glados.hr" className="block py-1 text-sm text-white/45 hover:text-yellow transition-colors">
-                partneri@glados.hr
+              <a href="mailto:partneri@gladoos.hr" className="block py-1 text-sm text-white/45 hover:text-yellow transition-colors">
+                partneri@gladoos.hr
               </a>
             </li>
             <FooterLink to="/restaurant/prijava">Panel restorana</FooterLink>
@@ -74,7 +74,7 @@ export function Footer() {
             </li>
             <li className="flex items-start gap-2 text-sm text-white/45 py-1">
               <Mail className="w-4 h-4 mt-0.5 text-yellow shrink-0" />
-              <a href="mailto:info@glados.hr" className="hover:text-yellow transition-colors">info@glados.hr</a>
+              <a href="mailto:info@gladoos.hr" className="hover:text-yellow transition-colors">info@gladoos.hr</a>
             </li>
             <li className="flex items-start gap-2 text-sm text-white/45 py-1">
               <Phone className="w-4 h-4 mt-0.5 text-yellow shrink-0" />
@@ -87,7 +87,7 @@ export function Footer() {
       {/* Bottom */}
       <div className="border-t border-white/8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30">
-          <p>© {new Date().getFullYear()} Gladoš. Sva prava pridržana.</p>
+          <p>© {new Date().getFullYear()} Gladooš. Sva prava pridržana.</p>
           <div className="flex items-center gap-4">
             <Link to="/uvjeti" className="hover:text-yellow transition-colors">Uvjeti korištenja</Link>
             <Link to="/privatnost" className="hover:text-yellow transition-colors">Privatnost</Link>
